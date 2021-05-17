@@ -1,6 +1,12 @@
 name: Java CI
 
-on: [push]
+on:
+ push:
+   branches:
+     - master
+ workflow_dispatch:
+   branches:
+     - main
 
 jobs:
   build:
@@ -23,7 +29,7 @@ jobs:
         -s .github/settings.xml \
         -DGHtoken=${{ secrets.GITHUB_TOKEN }} \
         -DGHusername=$GITHUB_ACTOR \
-        -DIAIKtoken=${{ secrets.IAIK_TOKEN }}
+        -DIAIKtoken=${{ secrets.IAIKTOKEN }}
 
     - name: Test with Maven
       run: mvn -B test --file pom.xml -s .github/settings.xml
